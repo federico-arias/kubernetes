@@ -1,32 +1,38 @@
+repositories:
+#
+- name: gitlab
+  url: https://charts.gitlab.io
+- name: eks
+  url: https://aws.github.io/eks-charts
 # To use official "stable" charts a.k.a https://github.com/helm/charts/tree/master/stable
 #- name: traefik
 #  url: https://charts.helm.sh/stable
-repositories:
-  - name: gitlab
-    url: https://charts.gitlab.io
-  - name: eks
-    url: https://aws.github.io/eks-charts
 
 environments:
-    default:
-      values:
-        - foo: bar
+  default:
+    values:
+    - foo: bar
           #secrets:
           #- baz: bar
 
 releases:
-  #- name: agent-config
-  #namespace: gitlab-agent
-  #chart: gitlab/gitlab-agent
-  #values: agent-config/values.yaml
-  #secrets: agent-config/secrets.yaml
-- name: aws-load-balancer-controller
-  chart: eks/aws-load-balancer-controller
-  namespace: kube-system
-  values:
-    - aws-load-balancer-controller/values.yaml
-
-
+  - name: agent-config
+    namespace: gitlab-agent
+    chart: gitlab/gitlab-agent
+    values:
+      - agent-config/values.yaml
+    secrets:
+      - agent-config/secrets.yaml
+  - name: aws-load-balancer-controller
+    chart: eks/aws-load-balancer-controller
+    namespace: kube-system
+    values:
+      - aws-load-balancer-controller/values.yaml
+  - name: aws-lb-sa-chart
+    chart: ./aws-lb-sa-chart
+    namespace: kube-system
+    values:
+      - controllerARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRole
 
 # helm upgrade --install agent-config gitlab/gitlab-agent \
 #    --namespace gitlab-agent \

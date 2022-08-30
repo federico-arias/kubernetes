@@ -1,2 +1,4 @@
 config:
   kasAddress: wss://kas.gitlab.com
+image:
+  tag: v15.4.0

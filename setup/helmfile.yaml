@@ -16,11 +16,11 @@ environments:
           #- baz: bar
 
 releases:
-  - name: agent-config
+  - name: aws-eks
     namespace: gitlab-agent
     chart: gitlab/gitlab-agent
     values:
-      - agent-config/values.yaml
+      - agent-config/values.yaml.gotmpl
     secrets:
       - agent-config/secrets.yaml
   - name: aws-load-balancer-controller

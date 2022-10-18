@@ -1,8 +1,8 @@
 sops:
   kms:
-    - arn: arn:aws:kms:us-east-2:135541436944:key/2e6f4142-48b9-4018-bc72-ad2c94e84d83
+    - arn: arn:aws:kms:us-east-2:135541436944:key/cf81fa8f-bc07-4e15-aec8-7efbba591045
       aws_profile: komet
 
 creation_rules:
   - path_regex: .*
-    kms: arn:aws:kms:us-east-2:135541436944:key/2e6f4142-48b9-4018-bc72-ad2c94e84d83
+    kms: arn:aws:kms:us-east-2:135541436944:key/cf81fa8f-bc07-4e15-aec8-7efbba591045

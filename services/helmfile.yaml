@@ -1,0 +1,12 @@
+helmDefaults:
+  createNamespace: true
+
+environments:
+  default:
+    values:
+      - foo: bar
+
+releases:
+  - name: sample-app
+    namespace: nlb-sample-app
+    chart: ./test-service

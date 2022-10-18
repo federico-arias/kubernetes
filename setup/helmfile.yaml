@@ -1,12 +1,16 @@
 repositories:
-#
-- name: gitlab
-  url: https://charts.gitlab.io
-- name: eks
-  url: https://aws.github.io/eks-charts
-# To use official "stable" charts a.k.a https://github.com/helm/charts/tree/master/stable
-#- name: traefik
-#  url: https://charts.helm.sh/stable
+  - name: gitlab
+    url: https://charts.gitlab.io
+  - name: eks
+    url: https://aws.github.io/eks-charts
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: awspca
+    url: https://cert-manager.github.io/aws-privateca-issuer
 
 environments:
   default:
@@ -16,23 +20,37 @@ environments:
           #- baz: bar
 
 releases:
-  - name: aws-eks
-    namespace: gitlab-agent
-    chart: gitlab/gitlab-agent
-    values:
-      - agent-config/values.yaml.gotmpl
-    secrets:
-      - agent-config/secrets.yaml
   - name: aws-load-balancer-controller
+    installed: true
     chart: eks/aws-load-balancer-controller
     namespace: kube-system
     values:
       - aws-load-balancer-controller/values.yaml
-  - name: aws-lb-sa-chart
-    chart: ./aws-lb-sa-chart
+  - name: aws-lb-serviceaccount
+    installed: true
+    chart: ./aws-lb-serviceaccount
     namespace: kube-system
     values:
-      - controllerARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRole
+      - controllerRoleARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRole
+  #  - name: cert-manager
+  #    namespace: cert-manager
+  #    chart: jetstack/cert-manager
+  #    version: v1.9.1
+  #    set:
+  #      - name: installCRDs
+  #        value: true
+  #  - namespace: aws-pca-issuer
+  #    name: aws-pca-issuer
+  #    chart: awspca/aws-pca-issuer
+        #  - name: prometheus-operator
+        #    chart: stable/prometheus-operator
+    #  - name: aws-eks
+    #    namespace: gitlab-agent
+    #    chart: gitlab/gitlab-agent
+    #    values:
+    #      - agent-config/values.yaml.gotmpl
+    #    secrets:
+    #      - agent-config/secrets.yaml
 
 # helm upgrade --install agent-config gitlab/gitlab-agent \
 #    --namespace gitlab-agent \

@@ -32,6 +32,14 @@ releases:
     namespace: kube-system
     values:
       - controllerRoleARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRole
+  - name: gitlab-agent
+    namespace: gitlab-agent
+    chart: gitlab/gitlab-agent
+    values:
+      - agent-config/values.yaml.gotmpl
+    secrets:
+      - agent-config/secrets.yaml
+
   #  - name: cert-manager
   #    namespace: cert-manager
   #    chart: jetstack/cert-manager
@@ -39,28 +47,5 @@ releases:
   #    set:
   #      - name: installCRDs
   #        value: true
-  #  - namespace: aws-pca-issuer
-  #    name: aws-pca-issuer
-  #    chart: awspca/aws-pca-issuer
-        #  - name: prometheus-operator
-        #    chart: stable/prometheus-operator
-    #  - name: aws-eks
-    #    namespace: gitlab-agent
-    #    chart: gitlab/gitlab-agent
-    #    values:
-    #      - agent-config/values.yaml.gotmpl
-    #    secrets:
-    #      - agent-config/secrets.yaml
-
-# helm upgrade --install agent-config gitlab/gitlab-agent \
-#    --namespace gitlab-agent \
-#    --create-namespace \
-#    --set image.tag=v15.2.0 \
-#    --set config.token= \
-#    --set config.kasAddress=wss://kas.gitlab.com
-#
-#    helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
-#      -n kube-system \
-#      --set clusterName=my-cluster \
-#      --set serviceAccount.create=false \
-#      --set serviceAccount.name=aws-load-balancer-controller
+  #  - name: prometheus-operator
+  #    chart: stable/prometheus-operator

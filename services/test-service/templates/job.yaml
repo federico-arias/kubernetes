@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "migration-job"
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration
+        image: "{{ .Values.job.image }}:{{ .Values.deployment.tag }}"
+        env:
+          {{- range $name, $value := .Values.job.env }}
+          - name: {{ $name | quote }}
+            value: {{ $value | quote }}
+          {{- end }}
+      restartPolicy: Never
+  backoffLimit: 1

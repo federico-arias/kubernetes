@@ -15,7 +15,14 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: public.ecr.aws/nginx/nginx:1.21
+          image: "{{ .Values.deployment.image }}:{{ .Values.deployment.tag }}"
           ports:
             - name: tcp
               containerPort: 80
+          env:
+            - name: PORT
+              value: "80"
+            {{- range $name, $value := .Values.deployment.env }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+            {{- end }}

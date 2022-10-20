@@ -6,15 +6,23 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:135541436944:certificate/8df13bdf-bb39-439f-a340-1e35f9e4e3f8
+    ## SSL Settings
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
   labels:
     app: nbl-sample-app-ingress
 spec:
   rules:
+    - host: app.komet.social
     - http:
         paths:
           - path: /api
             backend:
-              serviceName: nlb-sample-app
+              serviceName: nlb-sample-service
+              servicePort: 80
+          - path: /app
+            backend:
+              serviceName: nlb-sample-service
               servicePort: 80
 
 #    service.beta.kubernetes.io/aws-load-balancer-type: external

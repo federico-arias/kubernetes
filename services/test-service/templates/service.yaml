@@ -5,7 +5,7 @@ metadata:
   namespace: nlb-sample-app
   annotations:
 #Important Note:  Need to add health check path annotations in service level if we are planning to use multiple targets in a load balancer
-    alb.ingress.kubernetes.io/healthcheck-path: /api/healthz
+    alb.ingress.kubernetes.io/healthcheck-path: /api/v1/healthz
 #  annotations:
 #    service.beta.kubernetes.io/aws-load-balancer-type: external
 #    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip

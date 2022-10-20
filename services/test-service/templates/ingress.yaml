@@ -36,6 +36,10 @@ spec:
             backend:
               serviceName: nlb-sample-service
               servicePort: 80
+          - path: /*
+            backend:
+              serviceName: nlb-sample-service
+              servicePort: 80
 
 #    service.beta.kubernetes.io/aws-load-balancer-type: external
 #    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip

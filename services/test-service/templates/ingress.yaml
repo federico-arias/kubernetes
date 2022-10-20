@@ -1,9 +1,22 @@
-apiVersion: v1
-kind: Service
+apiVersion: extensions/v1beta1
+kind: Ingress
 metadata:
-  name: nlb-sample-service
+  name: sample-app-ingress
   namespace: nlb-sample-app
-#  annotations:
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+  labels:
+    app: nbl-sample-app-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: nlb-sample-app
+              servicePort: 80
+
 #    service.beta.kubernetes.io/aws-load-balancer-type: external
 #    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
 #    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
@@ -12,15 +25,3 @@ metadata:
 #    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
 #    # Only run SSL on the port named "https" below.
 #    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
-      protocol: TCP
-    - name: https
-      port: 443
-      targetPort: 80
-  type: LoadBalancer
-  selector:
-    app: nginx

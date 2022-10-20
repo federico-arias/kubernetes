@@ -34,11 +34,11 @@ spec:
               servicePort: 80
           - path: /app/*
             backend:
-              serviceName: nlb-sample-service
+              serviceName: frontend
               servicePort: 80
           - path: /*
             backend:
-              serviceName: nlb-sample-service
+              serviceName: frontend
               servicePort: 80
 
 #    service.beta.kubernetes.io/aws-load-balancer-type: external

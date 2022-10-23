@@ -10,3 +10,5 @@ releases:
   - name: sample-app
     namespace: nlb-sample-app
     chart: ./test-service
+    secrets:
+      - ./test-service/secrets.yaml

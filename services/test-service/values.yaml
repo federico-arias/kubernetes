@@ -5,19 +5,17 @@
 frontend:
   deployment:
     image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-frontend"
-    tag: "v1.11.0"
+    tag: "v1.13.1"
 
 deployment:
   image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-backend"
-  tag: "v1.23.7"
+  tag: "v1.24.0"
   env:
     BASE_URL: "https://app.komet.social"
     ROUTER_PATH: "/api"
 
 job:
   image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-migration-job"
-  env:
-    DATABASE_URL: "postgres://neutral_scorpion:p%3CH%7BiK_-l%2Buh%3C8Mo@production-kmt.cquyvketpoty.us-east-2.rds.amazonaws.com:5432/postgres"
 
 
 replicaCount: 1

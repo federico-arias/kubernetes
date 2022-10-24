@@ -1,19 +1,15 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: v1
+kind: Pod
 metadata:
   name: "migration-job"
   namespace: nlb-sample-app
 spec:
-  template:
-    spec:
-      containers:
-      - name: migration
-        image: "{{ .Values.job.image }}:{{ .Values.deployment.tag }}"
-        env:
-          {{- range $name, $value := .Values.job.env }}
-          - name: {{ $name | quote }}
-            value: {{ $value | quote }}
-          {{- end }}
-      restartPolicy: Never
-  backoffLimit: 1
-  activeDeadlineSeconds: 200
+  containers:
+  - name: migration
+    image: "{{ .Values.job.image }}:{{ .Values.deployment.tag }}"
+    env:
+      {{- range $name, $value := .Values.job.env }}
+      - name: {{ $name | quote }}
+        value: {{ $value | quote }}
+      {{- end }}
+  restartPolicy: Never

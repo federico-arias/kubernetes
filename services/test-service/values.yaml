@@ -9,7 +9,7 @@ frontend:
 
 deployment:
   image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-backend"
-  tag: "v1.24.0"
+  tag: "v1.25.0"
   env:
     BASE_URL: "https://app.komet.social"
     ROUTER_PATH: "/api"

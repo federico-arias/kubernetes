@@ -1,0 +1,10 @@
+version: 0.145.3
+dependencies:
+- name: aws-load-balancer-controller
+  repository: https://aws.github.io/eks-charts
+  version: 1.4.5
+- name: gitlab-agent
+  repository: https://charts.gitlab.io
+  version: 1.6.0
+digest: sha256:9beb37a3958427f2cf4eeb0f4f2cc31f63be58fcde4faff69245bbbecb8e20f2
+generated: "2022-10-23T22:11:14.653304878+02:00"

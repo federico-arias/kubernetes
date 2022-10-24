@@ -15,9 +15,7 @@ repositories:
 environments:
   default:
     values:
-    - foo: bar
-          #secrets:
-          #- baz: bar
+    - environment: production
 
 releases:
   - name: aws-load-balancer-controller
@@ -33,12 +31,20 @@ releases:
     values:
       - controllerRoleARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRole
   - name: gitlab-agent
+    installed: true
     namespace: gitlab-agent
     chart: gitlab/gitlab-agent
     values:
       - agent-config/values.yaml.gotmpl
     secrets:
       - agent-config/secrets.yaml
+#  - name: gitlab-agent-frontend
+#    namespace: gitlab-agent-frontend
+#    chart: gitlab/gitlab-agent
+#    values:
+#      - agent-config/values.yaml.gotmpl
+#    secrets:
+#      - agent-config/secrets-frontend.yaml
 
   #  - name: cert-manager
   #    namespace: cert-manager

@@ -2,21 +2,13 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-frontend:
-  deployment:
-    image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-frontend"
-    tag: "v1.13.1"
-
 deployment:
   image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-backend"
-  tag: "v1.25.0"
+  tag: "v1.32.0"
   env:
     BASE_URL: "https://app.komet.social"
     ROUTER_PATH: "/api"
-
-job:
-  image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-migration-job"
-
+    VERSION: "none"
 
 replicaCount: 1
 
@@ -53,8 +45,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  type: NodePort
+  healthcheckPath: /api/v1/healthz
 
 ingress:
   enabled: false

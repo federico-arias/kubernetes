@@ -1,8 +1,9 @@
+{{- if .Values.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: sample-app-ingress
-  namespace: nlb-sample-app
+  name: {{ .Values.deployment.name }}-ingress
+  namespace: {{ .Values.namespace }}
   annotations:
     # Ingress Core Settings
     kubernetes.io/ingress.class: "alb"
@@ -22,7 +23,7 @@ metadata:
     ## SSL Settings
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
   labels:
-    app: nbl-sample-app-ingress
+    app: {{ .Values.deployment.name }}-ingress
 spec:
   rules:
     - host: app.komet.social
@@ -30,7 +31,7 @@ spec:
         paths:
           - path: /api/*
             backend:
-              serviceName: nlb-sample-service
+              serviceName: {{ .Values.service.name }}
               servicePort: 80
           - path: /app/*
             backend:
@@ -40,6 +41,7 @@ spec:
             backend:
               serviceName: frontend
               servicePort: 80
+{{- end }}
 
 #    service.beta.kubernetes.io/aws-load-balancer-type: external
 #    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip

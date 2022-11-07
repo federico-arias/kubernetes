@@ -1,0 +1,17 @@
+deployment:
+  name: frontend
+  image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-frontend"
+  tag: "v1.19.0"
+  appLabel: frontend
+  env: {}
+
+service:
+  name: frontend
+  type: NodePort
+  healthcheckPath: /app/index.html
+
+ingress:
+  enabled: false
+
+replicaCount: 1
+healthcheck-path: "/app/index.html"

@@ -4,11 +4,18 @@ helmDefaults:
 environments:
   default:
     values:
-      - foo: bar
+      - env: prod
 
 releases:
-  - name: sample-app
-    namespace: nlb-sample-app
+  - name: backend
+    namespace: kmt-app
     chart: ./test-service
     secrets:
-      - ./test-service/secrets.yaml
+      - ./back-end/secrets.yaml
+    values:
+      - ./back-end/values.yaml
+  - name: frontend
+    namespace: kmt-app
+    chart: ./test-service
+    values:
+      - ./front-end/values.yaml

@@ -1,20 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nlb-sample-service
-  namespace: nlb-sample-app
+  name: {{ .Values.service.name }}
+  namespace: {{ .Values.namespace }}
   annotations:
-#Important Note:  Need to add health check path annotations in service level if we are planning to use multiple targets in a load balancer
-    alb.ingress.kubernetes.io/healthcheck-path: /api/v1/healthz
-#  annotations:
-#    service.beta.kubernetes.io/aws-load-balancer-type: external
-#    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
-#    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
-#    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-2:135541436944:certificate/8df13bdf-bb39-439f-a340-1e35f9e4e3f8
-#    # Note that the backend talks over HTTP.
-#    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-#    # Only run SSL on the port named "https" below.
-#    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+    alb.ingress.kubernetes.io/healthcheck-path: {{ .Values.service.healthcheckPath }}
 spec:
   ports:
     - name: http
@@ -26,4 +16,4 @@ spec:
       targetPort: 80
   type: NodePort
   selector:
-    app: nginx
+    app: {{ .Values.service.name }}

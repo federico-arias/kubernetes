@@ -1,27 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nlb-sample-app
-  namespace: nlb-sample-app
+  name: {{ .Values.deployment.name }}
+  namespace: {{ .Values.namespace }}
 spec:
-  replicas: 3
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: nginx
+      app: {{ .Values.deployment.appLabel }}
   template:
     metadata:
       labels:
-        app: nginx
+        app: {{ .Values.deployment.appLabel }}
     spec:
       containers:
-        - name: nginx
+        - name: {{ .Values.deployment.name | quote }}
           image: "{{ .Values.deployment.image }}:{{ .Values.deployment.tag }}"
+          {{- if .Values.deployment.args }}
+          args: {{ .Values.deployment.args }}
+          {{- end }}
           ports:
             - name: tcp
               containerPort: 80
           env:
-            - name: PORT
-              value: "80"
             {{- range $name, $value := .Values.deployment.env }}
             - name: {{ $name | quote }}
               value: {{ $value | quote }}

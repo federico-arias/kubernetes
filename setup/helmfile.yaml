@@ -3,14 +3,14 @@ repositories:
     url: https://charts.gitlab.io
   - name: eks
     url: https://aws.github.io/eks-charts
-  - name: ingress-nginx
-    url: https://kubernetes.github.io/ingress-nginx
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
   - name: jetstack
     url: https://charts.jetstack.io
   - name: awspca
     url: https://cert-manager.github.io/aws-privateca-issuer
+  - name: prometheus-comunity
+    url: https://prometheus-community.github.io/helm-charts
+    #- name: ingress-nginx
+    #url: https://kubernetes.github.io/ingress-nginx
 
 environments:
   default:
@@ -18,6 +18,9 @@ environments:
     - environment: production
 
 releases:
+  - name: prom
+    namespace: observability
+    chart: prometheus-community/kube-prometheus-stack
   - name: aws-load-balancer-controller
     installed: true
     chart: eks/aws-load-balancer-controller
@@ -45,13 +48,3 @@ releases:
       - agent-config/values.yaml.gotmpl
     secrets:
       - agent-config/secrets-frontend.yaml
-
-  #  - name: cert-manager
-  #    namespace: cert-manager
-  #    chart: jetstack/cert-manager
-  #    version: v1.9.1
-  #    set:
-  #      - name: installCRDs
-  #        value: true
-  #  - name: prometheus-operator
-  #    chart: stable/prometheus-operator

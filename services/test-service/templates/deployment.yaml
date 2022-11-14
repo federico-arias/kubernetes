@@ -17,7 +17,8 @@ spec:
         - name: {{ .Values.deployment.name | quote }}
           image: "{{ .Values.deployment.image }}:{{ .Values.deployment.tag }}"
           {{- if .Values.deployment.args }}
-          args: {{ .Values.deployment.args }}
+          command: [ "yarn" ]
+          args: {{ .Values.deployment.args | toYaml | nindent 14 }}
           {{- end }}
           ports:
             - name: tcp

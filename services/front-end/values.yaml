@@ -1,3 +1,5 @@
+namespace: kmt-app
+
 deployment:
   name: frontend
   image: "135541436944.dkr.ecr.us-east-2.amazonaws.com/kmt-frontend"
@@ -14,4 +16,3 @@ ingress:
   enabled: false
 
 replicaCount: 1
-healthcheck-path: "/app/index.html"

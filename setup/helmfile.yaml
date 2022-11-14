@@ -18,9 +18,9 @@ environments:
     - environment: production
 
 releases:
-  - name: prom
-    namespace: observability
-    chart: prometheus-community/kube-prometheus-stack
+  #  - name: prom
+  #    namespace: observability
+  #    chart: prometheus-community/kube-prometheus-stack
   - name: aws-load-balancer-controller
     installed: true
     chart: eks/aws-load-balancer-controller

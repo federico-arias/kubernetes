@@ -26,7 +26,7 @@ metadata:
     app: {{ .Values.deployment.name }}-ingress
 spec:
   rules:
-    - host: app.komet.social
+    - host: {{ .Values.ingress.host | quote }}
     - http:
         paths:
           - path: /api/*

@@ -6,6 +6,8 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/healthcheck-path: {{ .Values.service.healthcheckPath }}
 spec:
+  selector:
+    app: {{ .Values.deployment.name }}
   ports:
     - name: http
       port: 80
@@ -15,5 +17,3 @@ spec:
       port: 443
       targetPort: 80
   type: NodePort
-  selector:
-    app: {{ .Values.service.name }}

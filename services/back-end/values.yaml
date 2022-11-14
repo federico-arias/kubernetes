@@ -17,7 +17,7 @@ deployment:
 replicaCount: 1
 
 service:
-  name: backend-service
+  name: backend
   type: NodePort
   healthcheckPath: "/api/v1/healthz"
 

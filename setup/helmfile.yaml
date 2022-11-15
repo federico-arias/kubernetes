@@ -9,6 +9,8 @@ repositories:
     url: https://cert-manager.github.io/aws-privateca-issuer
   - name: prometheus-comunity
     url: https://prometheus-community.github.io/helm-charts
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
     #- name: ingress-nginx
     #url: https://kubernetes.github.io/ingress-nginx
 
@@ -16,11 +18,33 @@ environments:
   default:
     values:
     - environment: production
+      #  staging:
+      #    values:
+      #    - environment: staging
 
 releases:
-  #  - name: prom
-  #    namespace: observability
-  #    chart: prometheus-community/kube-prometheus-stack
+  - name: prometheus
+    namespace: prometheus
+    chart: prometheus-community/prometheus
+    set:
+      - name: "alertmanager.persistentVolume.storageClass"
+        value: "gp2"
+      - name: "server.persistentVolume.storageClass"
+        value: "gp2"
+  - name: grafana
+    namespace: grafana
+    chart: grafana/grafana
+    set:
+      - name: "alertmanager.persistentVolume.storageClass"
+        value: "gp2"
+      - name: "server.persistentVolume.storageClass"
+        value: "gp2"
+      - name: "persistence.enabled"
+        value: true
+      - name: "adminPassword"
+        value: "EKS"
+      - name: "service.type"
+        value: "LoadBalancer"
   - name: aws-load-balancer-controller
     installed: true
     chart: eks/aws-load-balancer-controller

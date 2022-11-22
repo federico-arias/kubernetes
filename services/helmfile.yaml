@@ -4,7 +4,12 @@ helmDefaults:
 environments:
   default:
     values:
-      - env: prod
+      - ./environments/staging.yaml
+    kubeContext: arn:aws:eks:us-east-1:135541436944:cluster/staging-kmt-cluster
+  production:
+    values:
+      - ./environments/production.yaml
+    kubeContext: arn:aws:eks:us-east-2:135541436944:cluster/production-kmt-cluster
 
 releases:
   - name: backend

@@ -1,3 +1,6 @@
+# Introduction
+
+# Setup
 
 To encrypt the file, define the ARN of your KMS key in .sops.yaml.
 Then, do:
@@ -13,3 +16,11 @@ $ helm secrets enc setup/agent-config/secrets.yaml
 ```
 
 Then, modify the controller ARN value using your ARN role.
+
+# Services
+
+To get the AWS Load Balancer URL, do:
+
+```bash
+kubectl get services --all-namespaces -o wide
+```

@@ -1,2 +1,4 @@
 clusterName: staging-kmt-cluster
 controllerRoleARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRoleKmtStaging
+# https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html
+controllerImageRepository: 602401143452.dkr.ecr.us-east-2.amazonaws.com

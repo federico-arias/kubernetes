@@ -52,6 +52,8 @@ releases:
     values:
       - ./aws-load-balancer-controller/values.yaml
       - clusterName: {{ .Values.clusterName }}
+      - image:
+          repository: {{ .Values.controllerImageRepository }}
   - name: aws-lb-serviceaccount
     installed: true
     chart: ./aws-lb-serviceaccount

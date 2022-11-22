@@ -1,2 +1,3 @@
 clusterName: production-kmt-cluster
 controllerRoleARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRoleKmtProduction
+controllerImageRepository: 602401143452.dkr.ecr.us-east-2.amazonaws.com/amazon/aws-load-balancer-controller

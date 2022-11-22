@@ -4,21 +4,28 @@ helmDefaults:
 environments:
   default:
     values:
-      - ./environments/staging.yaml
+      - ./environments/staging/values.yaml
     kubeContext: arn:aws:eks:us-east-1:135541436944:cluster/staging-kmt-cluster
+    secrets:
+      - ./environments/staging/secrets.yaml
   production:
     values:
-      - ./environments/production.yaml
+      - ./environments/production/values.yaml
+    secrets:
+      - ./environments/production/secrets.yaml
     kubeContext: arn:aws:eks:us-east-2:135541436944:cluster/production-kmt-cluster
 
 releases:
   - name: backend
     namespace: kmt-app
     chart: ./microservice
-    secrets:
-      - ./back-end/secrets.yaml
     values:
       - ./back-end/values.yaml
+      - deployment:
+          env:
+            DATABASE_URL: {{ .Environment.Values.databaseURL }}
+      - ingress:
+          host: {{ .Values.ingressHost }}
   - name: frontend
     namespace: kmt-app
     chart: ./microservice

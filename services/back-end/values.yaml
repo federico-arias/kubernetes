@@ -29,7 +29,7 @@ ingress:
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  host: "app.komet.social"
+  host: "staging.komet.social"
   paths: []
   tls: []
 

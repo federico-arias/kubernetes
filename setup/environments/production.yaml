@@ -1,0 +1,2 @@
+clusterName: production-kmt-cluster
+controllerRoleARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRoleKmtProduction

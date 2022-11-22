@@ -38,6 +38,10 @@ spec:
             backend:
               serviceName: frontend
               servicePort: 80
+          - path: /prom/*
+            backend:
+              serviceName: prometheus-server
+              servicePort: 9090
           - path: /*
             backend:
               serviceName: frontend

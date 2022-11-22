@@ -11,16 +11,16 @@ repositories:
     url: https://prometheus-community.github.io/helm-charts
   - name: grafana
     url: https://grafana.github.io/helm-charts
-    #- name: ingress-nginx
-    #url: https://kubernetes.github.io/ingress-nginx
 
 environments:
   default:
     values:
-    - environment: production
-      #  staging:
-      #    values:
-      #    - environment: staging
+      - ./environments/staging.yaml
+    kubeContext: arn:aws:eks:us-east-1:135541436944:cluster/staging-kmt-cluster
+  production:
+    values:
+      - ./environments/production.yaml
+    kubeContext: arn:aws:eks:us-east-2:135541436944:cluster/production-kmt-cluster
 
 releases:
   - name: prometheus
@@ -50,13 +50,14 @@ releases:
     chart: eks/aws-load-balancer-controller
     namespace: kube-system
     values:
-      - aws-load-balancer-controller/values.yaml
+      - ./aws-load-balancer-controller/values.yaml
+      - clusterName: {{ .Values.clusterName }}
   - name: aws-lb-serviceaccount
     installed: true
     chart: ./aws-lb-serviceaccount
     namespace: kube-system
     values:
-      - controllerRoleARN: arn:aws:iam::135541436944:role/AmazonEKSLoadBalancerControllerRole
+      - controllerRoleARN: {{ .Values.controllerRoleARN }}
   - name: gitlab-agent
     installed: true
     namespace: gitlab-agent

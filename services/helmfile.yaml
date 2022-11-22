@@ -9,13 +9,13 @@ environments:
 releases:
   - name: backend
     namespace: kmt-app
-    chart: ./test-service
+    chart: ./microservice
     secrets:
       - ./back-end/secrets.yaml
     values:
       - ./back-end/values.yaml
   - name: frontend
     namespace: kmt-app
-    chart: ./test-service
+    chart: ./microservice
     values:
       - ./front-end/values.yaml

@@ -1,4 +1,3 @@
-clusterName: production-kmt-cluster
 image:
   repository: 602401143452.dkr.ecr.us-east-2.amazonaws.com/amazon/aws-load-balancer-controller
 serviceAccount:

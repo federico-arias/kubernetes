@@ -26,6 +26,7 @@ releases:
             DATABASE_URL: {{ .Environment.Values.databaseURL }}
       - ingress:
           host: {{ .Values.ingressHost }}
+          certificateARN: {{ .Values.certificateARN }}
   - name: frontend
     namespace: kmt-app
     chart: ./microservice

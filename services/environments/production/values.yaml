@@ -1,1 +1,2 @@
 ingressHost: "app.komet.social"
+certificateARN: "arn:aws:acm:us-east-2:135541436944:certificate/c87e1ac6-4d14-4193-a31b-e106f6d7538c"

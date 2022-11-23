@@ -22,5 +22,5 @@ Then, modify the controller ARN value using your ARN role.
 To get the AWS Load Balancer URL, do:
 
 ```bash
-kubectl get services --all-namespaces -o wide
+kubectl get ingress --all-namespaces -o wide
 ```

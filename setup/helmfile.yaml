@@ -3,11 +3,7 @@ repositories:
     url: https://charts.gitlab.io
   - name: eks
     url: https://aws.github.io/eks-charts
-  - name: jetstack
-    url: https://charts.jetstack.io
-  - name: awspca
-    url: https://cert-manager.github.io/aws-privateca-issuer
-  - name: prometheus-comunity
+  - name: prometheus-community
     url: https://prometheus-community.github.io/helm-charts
   - name: grafana
     url: https://grafana.github.io/helm-charts
@@ -15,11 +11,15 @@ repositories:
 environments:
   default:
     values:
-      - ./environments/staging.yaml
+      - ./environments/staging/values.yaml
+    secrets:
+      - ./environments/staging/secrets.yaml
     kubeContext: arn:aws:eks:us-east-1:135541436944:cluster/staging-kmt-cluster
   production:
     values:
-      - ./environments/production.yaml
+      - ./environments/production/values.yaml
+    secrets:
+      - ./environments/production/secrets.yaml
     kubeContext: arn:aws:eks:us-east-2:135541436944:cluster/production-kmt-cluster
 
 releases:
@@ -66,12 +66,12 @@ releases:
     chart: gitlab/gitlab-agent
     values:
       - agent-config/values.yaml.gotmpl
-    secrets:
-      - agent-config/secrets.yaml
+      - config:
+          token: {{ .Environment.Values.backendAgentConfigToken }}
   - name: gitlab-agent-frontend
     namespace: gitlab-agent-frontend
     chart: gitlab/gitlab-agent
     values:
       - agent-config/values.yaml.gotmpl
-    secrets:
-      - agent-config/secrets-frontend.yaml
+      - config:
+          token: {{ .Environment.Values.frontendAgentConfigToken }}
